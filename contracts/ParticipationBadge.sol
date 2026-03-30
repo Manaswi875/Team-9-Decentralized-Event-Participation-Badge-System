@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 /**
- * @title ParticipationBadge
- * @dev This contract mints non-transferable ERC721 Soulbound Tokens (SBTs) 
+ * ParticipationBadge
+ * This contract mints non-transferable ERC721 Soulbound Tokens (SBTs) 
  * representing verified event participation (e.g., from Luma).
  */
 contract ParticipationBadge is ERC721, Ownable {
@@ -20,7 +20,7 @@ contract ParticipationBadge is ERC721, Ownable {
     constructor() ERC721("EventParticipationBadge", "EPB") {}
 
     /**
-     * @dev Mints a new soulbound badge to a participant's wallet.
+     * Mints a new soulbound badge to a participant's wallet.
      * Only the contract owner (which will be the automated bridge) can mint.
      * @param to - The wallet address of the event participant.
      * @param eventId - The unique identifier of the event
@@ -37,7 +37,7 @@ contract ParticipationBadge is ERC721, Ownable {
     }
 
     /**
-     * @dev Overrides standard ERC721 transfer logic to make the token Soulbound.
+     * Overrides standard ERC721 transfer logic to make the token Soulbound.
      * Tokens can only be minted (from address 0) or burned (to address 0).
      * Any attempt to transfer the badge between users will revert.
      */
@@ -53,7 +53,7 @@ contract ParticipationBadge is ERC721, Ownable {
     }
 
     /**
-     * @dev Retrieves the original event ID associated with a specific badge.
+     * Retrieves the original event ID associated with a specific badge.
      * Used by external stakeholders to verify a user's participation.
      * @param tokenId The ID of the soulbound token.
      * @return The event ID as a string.
