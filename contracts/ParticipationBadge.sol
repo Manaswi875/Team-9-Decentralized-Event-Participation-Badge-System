@@ -6,17 +6,26 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./interface_ParticipationBadge.sol";
 
-// Implementation of Soulbound Participation Badges
+/**
+ * ParticipationBadge - This contract mints non-transferable ERC721 Soulbound Tokens (SBTs) 
+ * representing verified event participation (e.g., from Luma).
+ */
 contract ParticipationBadge is ERC721, Ownable, IParticipationBadge {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    // maps each unique badge ID to its specific Event ID string
+    // Maps the unique token ID to the specific Event ID
     mapping(uint256 => string) private _badgeToEventId;
 
     constructor() ERC721("EventParticipationBadge", "EPB") {}
 
-    // Mints a badge for an attendee (Owner only)
+    /**
+     * Mints a new soulbound badge to a participant's wallet.
+     * Only the contract owner (which will be the automated bridge) can mint.
+     * @param to - The wallet address of the event participant.
+     * @param eventId - The unique identifier of the event
+     * @return The newly generated Token ID.
+     */
     function mintBadge(address to, string memory eventId) public onlyOwner override returns (uint256) {
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
@@ -28,8 +37,9 @@ contract ParticipationBadge is ERC721, Ownable, IParticipationBadge {
     }
 
     /**
-     * making the token "Soulbound." 
-     * override the standard transfer logic so it only allows the token to be minted or burned. 
+     * Overrides standard ERC721 transfer logic to make the token Soulbound.
+     * Tokens can only be minted (from address 0) or burned (to address 0).
+     * Any attempt to transfer the badge between users will revert.
      */
     function _beforeTokenTransfer(
         address from,
@@ -39,11 +49,16 @@ contract ParticipationBadge is ERC721, Ownable, IParticipationBadge {
     ) internal virtual override {
         super._beforeTokenTransfer(from, to, firstTokenId, batchSize);
 
-        // allow minting (from 0) and burning (to 0), but block everything else
+        // Allow minting (from 0) and burning (to 0), but block everything else
         require(from == address(0) || to == address(0), "ParticipationBadge: This badge is permanent and cannot be moved.");
     }
 
-    // Returns event ID for a given badge
+    /**
+     * Retrieves the original event ID associated with a specific badge.
+     * Used by external stakeholders to verify a user's participation.
+     * @param tokenId - The ID of the soulbound token.
+     * @return The event ID as a string.
+     */
     function getEventForBadge(uint256 tokenId) public view override returns (string memory) {
         _requireMinted(tokenId);
         return _badgeToEventId[tokenId];
