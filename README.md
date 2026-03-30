@@ -78,5 +78,5 @@ npx hardhat compile
 ```bash
 npx hardhat run scripts/deploy.js --network base-sepolia
 ```
-*Note: Make sure your account has enough Base Sepolia ETH for gas.*
+Note: Make sure your account has enough Base Sepolia ETH for gas.
 
