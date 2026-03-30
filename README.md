@@ -47,8 +47,33 @@ cd Team-9-Decentralized-Event-Participation-Badge-System
 npm install
 ```
 
-### Smart Contract Execution
-1. **Compile**: `npx hardhat compile`
-2. **Deploy**: `npx hardhat run scripts/deploy.js --network base-sepolia`
-   *Note: Requires a `.env` file with `PRIVATE_KEY` and `BASE_RPC_URL`.*
+### Testing
+We use Hardhat and Chai to ensure the contract functions as expected. The test suite covers deployment, owner-only minting, and the "Soulbound" token property.
+
+### Running Tests
+To run the full test suite locally:
+```bash
+npx hardhat test
+```
+
+## Deployment
+The contract is intended for the **Base** network. Follow these steps to deploy to Base Sepolia (Testnet).
+
+### 1. Configure Environment
+Create a `.env` file in the root directory and add your private key and RPC URL:
+```env
+PRIVATE_KEY="your_private_key_here"
+BASE_RPC_URL="https://sepolia.base.org"
+```
+
+### 2. Compile to ABI
+```bash
+npx hardhat compile
+```
+
+### 3. Execution (Base Sepolia)
+```bash
+npx hardhat run scripts/deploy.js --network base-sepolia
+```
+*Note: Make sure your account has enough Base Sepolia ETH for gas.*
 
