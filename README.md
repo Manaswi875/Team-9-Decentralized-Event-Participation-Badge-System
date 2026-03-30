@@ -56,6 +56,9 @@ To run the full test suite locally:
 npx hardhat test
 ```
 
+### Test Results
+![Test Results Result](./test_output.png)
+
 ## Deployment
 The contract is intended for the **Base** network. Follow these steps to deploy to Base Sepolia (Testnet).
 

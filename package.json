@@ -1,0 +1,19 @@
+{
+  "name": "team-9-decentralized-event-participation-badge-system",
+  "version": "1.0.0",
+  "description": "Decentralized Event Participation Badge System using Soulbound Tokens (SBTs) on the Base network.",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.3",
+    "dotenv": "^16.3.1"
+  }
+}
