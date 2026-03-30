@@ -14,7 +14,7 @@ contract ParticipationBadge is ERC721, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    // Maps the unique token ID to the specific Luma Event ID
+    // Maps the unique token ID to the specific Event ID
     mapping(uint256 => string) private _badgeToEventId;
 
     constructor() ERC721("EventParticipationBadge", "EPB") {}
@@ -22,8 +22,8 @@ contract ParticipationBadge is ERC721, Ownable {
     /**
      * @dev Mints a new soulbound badge to a participant's wallet.
      * Only the contract owner (which will be the automated bridge) can mint.
-     * @param to The wallet address of the event participant.
-     * @param eventId The off-chain Luma event identifier.
+     * @param to - The wallet address of the event participant.
+     * @param eventId - The unique identifier of the event
      * @return The newly generated Token ID.
      */
     function mintBadge(address to, string memory eventId) public onlyOwner returns (uint256) {
@@ -53,10 +53,10 @@ contract ParticipationBadge is ERC721, Ownable {
     }
 
     /**
-     * @dev Retrieves the original Luma event ID associated with a specific badge.
+     * @dev Retrieves the original event ID associated with a specific badge.
      * Used by external stakeholders to verify a user's participation.
      * @param tokenId The ID of the soulbound token.
-     * @return The string representing the event ID.
+     * @return The event ID as a string.
      */
     function getEventForBadge(uint256 tokenId) public view returns (string memory) {
         _requireMinted(tokenId);
