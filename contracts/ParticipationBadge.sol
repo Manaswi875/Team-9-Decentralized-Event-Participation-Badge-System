@@ -55,7 +55,7 @@ contract ParticipationBadge is ERC721, Ownable {
     /**
      * Retrieves the original event ID associated with a specific badge.
      * Used by external stakeholders to verify a user's participation.
-     * @param tokenId The ID of the soulbound token.
+     * @param tokenId - The ID of the soulbound token.
      * @return The event ID as a string.
      */
     function getEventForBadge(uint256 tokenId) public view returns (string memory) {
