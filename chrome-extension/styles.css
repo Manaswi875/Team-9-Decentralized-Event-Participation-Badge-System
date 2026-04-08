@@ -1,0 +1,131 @@
+/* Floating Button Styles */
+.web3-luma-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10000;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #0052FF 0%, #0036A8 100%);
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 82, 255, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.web3-luma-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 82, 255, 0.4);
+}
+
+.web3-luma-btn:active {
+  transform: translateY(1px);
+}
+
+.web3-luma-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Modal Overlay Styles */
+.web3-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 100000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Modal Content Styles */
+.web3-modal-content {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  text-align: center;
+  animation: web3-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes web3-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.web3-modal-header h2 {
+  margin: 0 0 16px 0;
+  color: #111;
+  font-size: 24px;
+}
+
+.web3-modal-body p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.web3-highlight {
+  color: #0052FF !important;
+  font-weight: 500;
+  background: #F0F5FF;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.web3-tx-info {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.web3-tx-info p {
+  font-size: 14px;
+  margin: 8px 0;
+  color: #333;
+}
+
+.web3-tx-info code {
+  display: block;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  background: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+  color: #495057;
+  word-break: break-all;
+}
+
+.web3-close-btn {
+  margin-top: 24px;
+  padding: 12px 24px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.web3-close-btn:hover {
+  background: #333;
+}
