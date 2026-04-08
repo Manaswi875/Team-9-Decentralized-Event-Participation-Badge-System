@@ -15,6 +15,10 @@ const ABI = [
   "function mintBadge(address to, string memory eventId) public returns (uint256)"
 ];
 
+app.get('/', (req, res) => {
+  res.send('Hi! Your setup is working! \nYou can now mint participation badges.');
+});
+
 app.post('/api/mint', async (req, res) => {
   try {
     const { eventContext } = req.body;
