@@ -53,7 +53,7 @@ app.post('/api/mint', async (req, res) => {
     
   } catch (error) {
     console.error("Error during minting process:", error);
-    res.status(500).json({ error: "Internal Server Error", details: error.message });
+    res.status(500).json({ error: "Internal Server Error", details: error.reason });
   }
 });
 
