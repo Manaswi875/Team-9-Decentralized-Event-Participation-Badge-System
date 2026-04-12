@@ -16,7 +16,7 @@ const ABI = [
 ];
 
 app.get('/', (req, res) => {
-  res.send('Hi! Your setup is working! \nYou can now mint participation badges.');
+  res.send('setup is working!');
 });
 
 app.post('/api/mint', async (req, res) => {
