@@ -5,12 +5,13 @@
   "description": "Bridges Luma event registrations with on-chain participation badges.",
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "host_permissions": [
     "*://lu.ma/*",
     "*://luma.com/*",
-    "http://localhost:3000/*"
+    "http://localhost:3001/*"
   ],
   "content_scripts": [
     {

@@ -39,7 +39,7 @@ This guide will walk you through how to test the **Decentralized Event Participa
    ```bash
    npm start
    ```
-   *(It should display "Luma-Base Bridge Backend running on http://localhost:3000")*
+   *(It should display the local platform startup logs and confirm the email delivery mode.)*
 
 ## 3. Load the Chrome Extension
 
@@ -52,13 +52,16 @@ This guide will walk you through how to test the **Decentralized Event Participa
 
 ## 4. Execute the End-to-End Flow!
 
-1. In Chrome, navigate to any Luma event page, for example: `https://lu.ma/` or an actual event page.
-2. You will see a glowing blue button at the bottom right corner of the screen: **Mint Badge (Simulate Registration)**.
-3. Click the button!
-4. The extension will scrape the page title, generate an Event ID, and notify your backend server.
-5. Look at your **Terminal 3 (Backend)**. You will see logs indicating it received the request and is minting the badge.
-6. Look at your **Terminal 1 (Hardhat)**. You will see the Ethereum transaction mined successfully.
-7. Back in Chrome, a beautiful **Success Notification Overlay** will pop up, proving the badge was minted and sent to the dummy account `0x7099...79C8`.
+1. In Chrome, navigate to the real Luma event page you want to use for registration.
+2. Complete the normal Luma registration form with a test attendee email address.
+3. The extension will watch the form submission, wait for Luma to show a confirmed registration state, and then call your backend automatically.
+4. A floating Badge Pop status card should appear in the bottom-right corner confirming that the attendee's check-in QR email was sent.
+5. Open your backend dashboard at `http://localhost:3001/` and confirm the guest appears in the registry and the email outbox.
+6. Open the attendee's email inbox and use the QR code from the check-in email.
+7. At the event check-in flow, open `http://localhost:3001/staff` and scan that QR code.
+8. The backend will send the claim email automatically after a successful scan.
+9. Open the claim link, create an account or sign in, and mint the badge.
+10. If blockchain claims are enabled, verify the token at `http://localhost:3001/verify/<tokenId>`.
 
 ---
-**Congratulations! The end-to-end bridge is fully operational.**
+**Congratulations! The extension now drives the full Luma registration into QR email, check-in, claim, and badge minting flow.**
