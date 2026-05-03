@@ -14,7 +14,7 @@
 
 const { Router } = require("express");
 
-const { persistStore } = require("../../store");
+const { getStore, persistStore } = require("../../store");
 const { normalizeEmail } = require("../../lib/security");
 const { logServer } = require("../../logger");
 const mailer = require("../../mailerInstance");
@@ -76,7 +76,6 @@ router.post("/api/integrations/luma/register", async (req, res) => {
     sanitizeEventId(getEvent().id) ||
     "badge-pop-event";
 
-  const { getStore } = require("../../store");
   const existingGuest = getStore().guests.find(
     (candidate) =>
       !candidate.archived &&

@@ -11,7 +11,7 @@ const express = require("express");
 
 const config = require("./lib/config");
 const { isChainConfigured } = require("./lib/blockchain");
-const mailer = require("./helpers/mailerInstance");
+const mailer = require("./mailerInstance");
 const { getStore } = require("./store");
 const { logServer } = require("./logger");
 const { getEvent } = require("./helpers/eventHelpers");
