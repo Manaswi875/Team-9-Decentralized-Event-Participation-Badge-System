@@ -16,6 +16,7 @@ contract ParticipationBadge is ERC721, Ownable, IParticipationBadge {
 
     // Maps the unique token ID to the specific Event ID
     mapping(uint256 => string) private _badgeToEventId;
+    mapping(address => mapping(bytes32 => bool)) private _claimedEventKeys;
 
     constructor() ERC721("EventParticipationBadge", "EPB") {}
 
@@ -27,13 +28,34 @@ contract ParticipationBadge is ERC721, Ownable, IParticipationBadge {
      * @return The newly generated Token ID.
      */
     function mintBadge(address to, string memory eventId) public onlyOwner override returns (uint256) {
+        require(to != address(0), "ParticipationBadge: attendee wallet cannot be the zero address.");
+
+        bytes32 eventKey = keccak256(bytes(eventId));
+        require(
+            !_claimedEventKeys[to][eventKey],
+            "ParticipationBadge: attendee already has a badge for this event."
+        );
+
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
 
         _mint(to, newItemId);
         _badgeToEventId[newItemId] = eventId;
+        _claimedEventKeys[to][eventKey] = true;
+
+        emit BadgeMinted(newItemId, to, eventKey, eventId);
 
         return newItemId;
+    }
+
+    function burnBadge(uint256 tokenId) public onlyOwner override {
+        address attendee = ownerOf(tokenId);
+        string memory eventId = _badgeToEventId[tokenId];
+        bytes32 eventKey = keccak256(bytes(eventId));
+
+        delete _badgeToEventId[tokenId];
+        _claimedEventKeys[attendee][eventKey] = false;
+        _burn(tokenId);
     }
 
     /**
@@ -62,5 +84,17 @@ contract ParticipationBadge is ERC721, Ownable, IParticipationBadge {
     function getEventForBadge(uint256 tokenId) public view override returns (string memory) {
         _requireMinted(tokenId);
         return _badgeToEventId[tokenId];
+    }
+
+    function hasBadge(address attendee, string memory eventId) public view override returns (bool) {
+        return _claimedEventKeys[attendee][keccak256(bytes(eventId))];
+    }
+
+    function approve(address, uint256) public pure override {
+        revert("ParticipationBadge: approvals are disabled for soulbound badges.");
+    }
+
+    function setApprovalForAll(address, bool) public pure override {
+        revert("ParticipationBadge: approvals are disabled for soulbound badges.");
     }
 }

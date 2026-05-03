@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Participation Badge Bridge",
+  "version": "1.0.0",
+  "description": "Bridges Luma event registrations with on-chain participation badges.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://lu.ma/*",
+    "*://luma.com/*",
+    "http://localhost:3001/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://lu.ma/*",
+        "*://luma.com/*"
+      ],
+      "css": ["styles.css"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
