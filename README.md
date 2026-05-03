@@ -10,23 +10,18 @@ Event check-in and on-chain badge system. Attendees RSVP on Luma, get checked in
 - Sai Manaswi Seela
 - Harshit Kumar Metpally
 
-## How it works
+## Overview
+Badge Pop currently supports this flow:
 
-A Chrome extension watches Luma event pages and forwards each RSVP to the local server. The server emails the guest a QR check-in pass. Staff scan the QR at the door — that marks the guest as checked in and triggers a claim email. The guest opens the Claim Portal, creates an account, and mints their badge. The server provisions a custodial Ethereum wallet per account and calls `mintBadge` on their behalf. Badges are soulbound: the contract blocks all transfers after minting.
-
-```
-Luma RSVP → Chrome extension → POST /api/integrations/luma/register
-                                         ↓
-                                  QR check-in email sent
-                                         ↓
-                              Staff scan at POST /api/check-in/scan
-                                         ↓
-                                  Claim email sent
-                                         ↓
-                             Guest registers → wallet provisioned
-                                         ↓
-                                  Badge minted on Base
-```
+1. A guest RSVPs on Luma.
+2. The Chrome extension captures that registration and sends it to the local backend.
+3. The backend emails the guest a QR-based check-in pass.
+4. Staff scan the QR code at the event.
+5. Check-in triggers the badge claim email.
+6. The guest signs in or creates an account in the Claim Portal.
+7. The backend provisions a wallet for that account.
+8. The guest mints a soulbound attendance badge.
+9. Anyone can verify the badge on-chain from the public verification page.
 
 ## Project Structure
 
@@ -51,6 +46,7 @@ Luma RSVP → Chrome extension → POST /api/integrations/luma/register
 ```bash
 npm install              # Hardhat toolchain (repo root)
 cd backend && npm install
+cd ..
 ```
 
 ### Environment
