@@ -155,7 +155,7 @@ function VerifyApp() {
       return payload;
     } catch (error) {
       setVerification(null);
-      setBanner(error.message, "error");
+      setBanner("Error/Invalid Token", "error");
       return null;
     } finally {
       setVerifyLoading(false);
