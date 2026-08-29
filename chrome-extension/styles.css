@@ -1,0 +1,151 @@
+.badgepop-indicator {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2147483646;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  max-width: min(280px, calc(100vw - 32px));
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
+  backdrop-filter: blur(14px);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.badgepop-indicator.ready {
+  background: rgba(242, 248, 247, 0.96);
+  color: #21584f;
+}
+
+.badgepop-indicator.info {
+  background: rgba(238, 249, 247, 0.96);
+  color: #0f4c45;
+}
+
+.badgepop-indicator.success {
+  background: rgba(235, 250, 240, 0.97);
+  color: #0f5b33;
+}
+
+.badgepop-indicator.error {
+  background: rgba(254, 240, 237, 0.98);
+  color: #9f2d22;
+}
+
+.badgepop-indicator-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 0 0 rgba(33, 88, 79, 0.32);
+  animation: badgepop-indicator-pulse 1.9s ease-out infinite;
+}
+
+.badgepop-indicator-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badgepop-panel {
+  position: fixed;
+  right: 24px;
+  bottom: 76px;
+  z-index: 2147483647;
+  width: min(360px, calc(100vw - 32px));
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(14px);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.badgepop-panel.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.badgepop-panel.info {
+  background: rgba(238, 249, 247, 0.96);
+  color: #0f4c45;
+}
+
+.badgepop-panel.success {
+  background: rgba(235, 250, 240, 0.97);
+  color: #0f5b33;
+}
+
+.badgepop-panel.error {
+  background: rgba(254, 240, 237, 0.98);
+  color: #9f2d22;
+}
+
+.badgepop-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.badgepop-panel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.78;
+}
+
+.badgepop-panel-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.badgepop-panel-message {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.badgepop-panel-action {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.88);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.badgepop-panel-action:hover {
+  opacity: 0.92;
+}
+
+@keyframes badgepop-indicator-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(33, 88, 79, 0.28);
+  }
+
+  70% {
+    box-shadow: 0 0 0 7px rgba(33, 88, 79, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(33, 88, 79, 0);
+  }
+}

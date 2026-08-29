@@ -11,6 +11,12 @@ pragma solidity ^0.8.19;
  * using the same set of rules.
  */
 interface IParticipationBadge {
+    event BadgeMinted(
+        uint256 indexed tokenId,
+        address indexed attendee,
+        bytes32 indexed eventHash,
+        string eventId
+    );
     
     /**
      * This function issues a new badge to a verified attendee. 
@@ -26,6 +32,12 @@ interface IParticipationBadge {
     function mintBadge(address to, string memory eventId) external returns (uint256);
 
     /**
+     * Testing helper that lets the contract owner burn a previously issued badge.
+     * This is useful for demo resets when we want to re-run the claim flow.
+     */
+    function burnBadge(uint256 tokenId) external;
+
+    /**
      * Use this if you have a badge ID and need to know which event it was for.
      * 
      * Since a user might collect many different participation badges over time, 
@@ -33,4 +45,10 @@ interface IParticipationBadge {
      * when the badge was first minted.
      */
     function getEventForBadge(uint256 tokenId) external view returns (string memory);
+
+    /**
+     * Returns true if an address already holds a badge for the supplied event ID.
+     * This protects the claim flow from issuing duplicate participation records.
+     */
+    function hasBadge(address attendee, string memory eventId) external view returns (bool);
 }
