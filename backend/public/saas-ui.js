@@ -399,6 +399,7 @@ export function DetailRow({ label, value, mono = false }) {
 export function Sidebar({ active = "dashboard" }) {
   const navItems = [
     { key: "dashboard", label: "Dashboard", href: "/", icon: DashboardIcon },
+    { key: "register", label: "Register", href: "/register", icon: PlusIcon },
     { key: "scanner", label: "Event Scanner", href: "/staff", icon: ScannerIcon },
     { key: "claim", label: "Claim Portal", href: "/claim", icon: PortalIcon },
   ];

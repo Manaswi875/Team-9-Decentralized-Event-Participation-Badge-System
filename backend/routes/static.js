@@ -17,6 +17,10 @@ router.get("/staff", (_req, res) => {
   res.sendFile(path.join(config.PUBLIC_DIR, "staff.html"));
 });
 
+router.get("/register", (_req, res) => {
+  res.sendFile(path.join(config.PUBLIC_DIR, "register.html"));
+});
+
 router.get("/claim", (_req, res) => {
   res.sendFile(path.join(config.PUBLIC_DIR, "claim.html"));
 });

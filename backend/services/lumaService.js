@@ -104,9 +104,12 @@ function buildExtensionEventState(eventContext = {}) {
  * @param {object} params
  * @param {object} params.attendee     - Luma attendee fields
  * @param {object} [params.eventContext={}]
+ * @param {string} [params.source="luma-extension"] - Where this registration came from
+ *   (e.g. "public-form" for the self-serve registration page). Only affects the
+ *   guest record's `source`/`externalRegistrationKey` labeling, not the flow itself.
  * @returns {{ guest: object, created: boolean }}
  */
-function upsertLumaGuest({ attendee, eventContext = {} }) {
+function upsertLumaGuest({ attendee, eventContext = {}, source = "luma-extension" }) {
   const store = getStore();
   const normalizedEmail = normalizeEmail(attendee.email);
   const normalizedEventId =
@@ -115,7 +118,7 @@ function upsertLumaGuest({ attendee, eventContext = {} }) {
     sanitizeEventId(getEvent().id) ||
     "badge-pop-event";
 
-  const externalRegistrationKey = `luma:${normalizedEventId}:${normalizedEmail}`;
+  const externalRegistrationKey = `${source}:${normalizedEventId}:${normalizedEmail}`;
   const now = new Date().toISOString();
 
   // Try to find an existing non-archived guest for this registration.
@@ -166,7 +169,7 @@ function upsertLumaGuest({ attendee, eventContext = {} }) {
       sourceEventName:
         String(eventContext.eventName || "").trim() || getEvent().name,
       externalRegistrationKey,
-      source: "luma-extension",
+      source,
     };
 
     store.guests.unshift(guest);
